@@ -18,11 +18,11 @@
       "type": "object",
       "minProperties": 1,
       "additionalProperties": {
-        "$ref": "#/definitions/schema"
+        "$ref": "#/$defs/schema"
       }
     }
   },
-  "$definitions": {
+  "$defs": {
     "schema": {
       "type": "object",
       "required": ["type"],
@@ -52,135 +52,195 @@
           ]
         }
       },
-      "oneOf": [
+      "allOf": [
         {
-          "$ref": "#/definitions/string"
+          "$ref": "#/$defs/string"
         },
         {
-          "$ref": "#/definitions/integer"
+          "$ref": "#/$defs/integer"
         },
         {
-          "$ref": "#/definitions/floatingpoint"
+          "$ref": "#/$defs/floatingpoint"
         },
         {
-          "$ref": "#/definitions/array"
+          "$ref": "#/$defs/array"
         },
         {
-          "$ref": "#/definitions/object"
-        },
-        {
-          "$ref": "#/definitions/other"
+          "$ref": "#/$defs/object"
         }
       ]
     },
     "object": {
-      "type": "object",
-      "required": ["type", "properties"],
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "object"
-        },
-        "required": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
+      "if": {
+        "type": "object",
+        "required": ["type"],
         "properties": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/schema"
+          "type": {
+            "type": "string",
+            "const": "object"
           }
-        },
-        "additionalProperties": {
-          "oneOf": [
-            {
-              "type": "boolean"
-            },
-            {
-              "$ref": "#/definitions/schema"
+        }
+      },
+      "then": {
+        "type": "object",
+        "required": ["properties"],
+        "properties": {
+          "required": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
-          ],
-          "default": false
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/$defs/schema"
+            }
+          },
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/$defs/schema"
+              }
+            ],
+            "default": false
+          }
+        }
+      }
+    },
+    "array": {
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "array"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "required": ["items"],
+        "properties": {
+          "items": {
+            "type": "object",
+            "items": {
+              "$ref": "#/$defs/schema"
+            }
+          },
+          "maxItems": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "uniqueItems": {
+            "type": "boolean",
+            "default": false
+          }
         }
       }
     },
     "string": {
-      "type": "object",
-      "required": ["type", "items"],
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "string"
-        },
-        "format": {
-          "type": "string",
-          "enum": ["email", "idn-email", "iri", "uri", "uuid"]
-        },
-        "maxLength": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "minLength": {
-          "type": "integer",
-          "minimum": 0,
-          "default": 0
-        },
-        "pattern": {
-          "type": "string",
-          "format": "regex"
-        },
-        "enum": {
-          "type": "array",
-          "items": {
-            "type": "string"
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "string"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": ["email", "idn-email", "iri", "uri", "uuid"]
+          },
+          "maxLength": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minLength": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "pattern": {
+            "type": "string",
+            "format": "regex"
+          },
+          "enum": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
     },
     "floatingpoint": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["float", "double"]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/_numerical"
-        }
-      ]
-    },
-    "integer": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "int8",
-            "uint8",
-            "int16",
-            "uint16",
-            "int32",
-            "uint32",
-            "int64",
-            "uint64"
-          ]
-        },
-        "enum": {
-          "type": "array",
-          "items": {
-            "type": "integer"
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["float", "double"]
           }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/_numerical"
+      "then": {
+        "$ref": "#/$defs/_numerical"
+      }
+    },
+    "integer": {
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "int8",
+              "uint8",
+              "int16",
+              "uint16",
+              "int32",
+              "uint32",
+              "int64",
+              "uint64"
+            ]
+          }
         }
-      ]
+      },
+      "then": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/_numerical"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "enum": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ]
+      }
     },
     "_numerical": {
       "type": "object",
@@ -196,52 +256,6 @@
         },
         "exclusiveMinimum": {
           "type": "number"
-        }
-      }
-    },
-    "array": {
-      "type": "object",
-      "required": ["items"],
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "array"
-        },
-        "items": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/schema"
-          }
-        },
-        "maxItems": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "minItems": {
-          "type": "integer",
-          "minimum": 0,
-          "default": 0
-        },
-        "uniqueItems": {
-          "type": "boolean",
-          "default": false
-        }
-      }
-    },
-    "other": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "boolean",
-            "binary",
-            "enum",
-            "date",
-            "date-time",
-            "geometry",
-            "bounding-box"
-          ]
         }
       }
     }
