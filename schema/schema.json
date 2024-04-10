@@ -2,9 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://fiboa.github.io/schema/v0.1.0/schema.json",
   "type": "object",
-  "required": ["schema", "properties"],
+  "required": ["$schema", "properties"],
   "properties": {
-    "schema": {
+    "$schema": {
       "type": "string",
       "const": "https://fiboa.github.io/schema/v0.1.0/schema.json"
     },
@@ -50,7 +50,15 @@
             "geometry",
             "bounding-box"
           ]
-        }
+        },
+        "deprecated": {
+          "type": "boolean",
+          "default": false
+        },
+        "description": {
+          "type": "string"
+        },
+        "default": {}
       },
       "allOf": [
         {
