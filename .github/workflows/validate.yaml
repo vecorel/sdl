@@ -11,5 +11,4 @@ jobs:
           node-version: "lts/*"
       - uses: actions/checkout@v4
       - run: npm install -g ajv-cli
-      - run: curl -o draft-2020-12.json -L https://json-schema.org/draft/2020-12/schema
       - run: ajv compile -s schema/schema.json --spec=draft2020 --validate-formats=false --strict=true
