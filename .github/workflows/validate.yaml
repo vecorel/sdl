@@ -1,0 +1,15 @@
+name: Run Tests
+on:
+  - push
+  - pull_request
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+      - uses: actions/checkout@v4
+      - run: npm install -g ajv-cli
+      - run: curl -o draft-2020-12.json -L https://json-schema.org/draft/2020-12/schema
+      - run: ajv compile -s schema/schema.json --spec=draft2020 --validate-formats=false --strict=true

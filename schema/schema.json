@@ -136,7 +136,7 @@
         "properties": {
           "items": {
             "type": "object",
-            "items": {
+            "additionalProperties": {
               "$ref": "#/$defs/schema"
             }
           },
