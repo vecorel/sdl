@@ -7,6 +7,8 @@ Nevertheless, fiboa Schema can be translated into JSON Schema.
 - Schema identifier: `https://fiboa.github.io/schema/v0.1.0/schema.json`
 - [Metaschema](https://fiboa.github.io/schema/v0.1.0/schema.json) (as JSON Schema)
 
+## Vocabulary
+
 The following keywords are generally supported:
 
 - `type`: The [fiboa data types](datatypes.md) as a string, **required**.
