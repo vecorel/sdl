@@ -135,10 +135,7 @@
         "required": ["items"],
         "properties": {
           "items": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/$defs/schema"
-            }
+            "$ref": "#/$defs/schema"
           },
           "maxItems": {
             "type": "integer",
