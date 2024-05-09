@@ -58,6 +58,8 @@ but it is likely unsupported by the fiboa tooling.
 - `patternProperties`
   (Note: In objects additional properties are disallowed by default, i.e. the default value is `false`.
   In JSON Schema the default value is `true`.)
+- `minProperties`
+- `maxProperties` (>= 1)
 
 Either `properties`, `additionalProperties` or `patternProperties` must be provided.
 

@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- `patternProperties` for the `object` data type
+- `patternProperties`, `minProperties` and `maxProperties` for the `object` data type
 - `geometryTypes` for the `geometry` data type
 
 ### Changed

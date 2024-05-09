@@ -139,6 +139,15 @@
               }
             ],
             "default": false
+          },
+          "maxProperties": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minProperties": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
           }
         }
       }
