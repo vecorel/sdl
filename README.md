@@ -20,9 +20,12 @@ At the top-level, you can also indicate the schema language and version:
 
 - `$schema`: The schema identifier, see above.
 
-Additionally, the following validation vocabulary is defined by JSON Schema:
+Additionally, the following validation vocabulary per data type is defined by JSON Schema.
 
-For strings:
+In principle any keywords available in JSON Schema 2020-12 can be used,
+but it is likely unsupported by the fiboa tooling.
+
+### String data type
 
 - `format` (values: `email`, `idn-email`, `iri`, `uri`, `uuid`)
 - `pattern`
@@ -30,7 +33,7 @@ For strings:
 - `maxLength`
 - `enum`
 
-For numerical data types:
+### Numerical data type
 
 - `minimum`
 - `maximum`
@@ -38,20 +41,28 @@ For numerical data types:
 - `exclusiveMaximum`
 - `enum` (for integer data types only)
 
-For arrays:
+### Array data type
 
 - `items` (required, object only, sub-schema must be compliant to fiboa Schema)
 - `minItems`
 - `maxItems`
 - `uniqueItems`
 
-For objects:
+### Object data type
 
 - `required`
-- `properties` (required, sub-schemas must be compliant to fiboa Schema)
+- `properties` (sub-schemas must be compliant to fiboa Schema)
 - `additionalProperties`
   (Note: In objects additional properties are disallowed by default, i.e. the default value is `false`.
   In JSON Schema the default value is `true`.)
+- `patternProperties`
+  (Note: In objects additional properties are disallowed by default, i.e. the default value is `false`.
+  In JSON Schema the default value is `true`.)
 
-In principle any keywords available in JSON Schema 2020-12 can be used,
-but it is likely unsupported by the fiboa tooling.
+Either `properties`, `additionalProperties` or `patternProperties` must be provided.
+
+### Geometry data type
+
+- `geometryTypes` (not part of JSON Schema):
+  A list of allowed geometry types.
+  Any of: `Point`, `MultiPoint`, `LineString`, `MultiLineString`, `Polygon`, `MultiPolygon`

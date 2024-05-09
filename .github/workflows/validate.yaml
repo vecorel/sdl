@@ -11,4 +11,4 @@ jobs:
           node-version: "lts/*"
       - uses: actions/checkout@v4
       - run: npm install -g ajv-cli
-      - run: ajv compile -s schema/schema.json --spec=draft2020 --validate-formats=false --strict=true
+      - run: ajv compile -s schema/schema.json --spec=draft2020 --validate-formats=false --strict=true --strict-required=false

@@ -75,6 +75,9 @@
         },
         {
           "$ref": "#/$defs/object"
+        },
+        {
+          "$ref": "#/$defs/geometry"
         }
       ]
     },
@@ -91,7 +94,17 @@
       },
       "then": {
         "type": "object",
-        "required": ["properties"],
+        "anyOf": [
+          {
+            "required": ["properties"]
+          },
+          {
+            "required": ["additionalProperties"]
+          },
+          {
+            "required": ["patternProperties"]
+          }
+        ],
         "properties": {
           "required": {
             "type": "array",
@@ -104,6 +117,17 @@
             "additionalProperties": {
               "$ref": "#/$defs/schema"
             }
+          },
+          "patternProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/$defs/schema"
+            },
+            "propertyNames": {
+              "type": "string",
+              "format": "regex"
+            },
+            "default": {}
           },
           "additionalProperties": {
             "oneOf": [
@@ -245,6 +269,37 @@
             }
           }
         ]
+      }
+    },
+    "geometry": {
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "geometry"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "geometryTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Point",
+                "LineString",
+                "Polygon",
+                "MultiPoint",
+                "MultiLineString",
+                "MultiPolygon"
+              ]
+            }
+          }
+        }
       }
     },
     "_numerical": {

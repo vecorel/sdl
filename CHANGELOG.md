@@ -9,11 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- ...
+- `patternProperties` for the `object` data type
+- `geometryTypes` for the `geometry` data type
 
 ### Changed
 
-- ...
+- Data type `object` requires any of `properties`, `patternProperties` or `additionalProperties` instead of requiring always `properties`
 
 ### Deprecated
 
