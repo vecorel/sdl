@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - `patternProperties`, `minProperties` and `maxProperties` for the `object` data type
+- `contains` for the `array` data type
 - `geometryTypes` for the `geometry` data type
 
 ### Changed

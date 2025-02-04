@@ -47,6 +47,7 @@ but it is likely unsupported by the fiboa tooling.
 - `minItems`
 - `maxItems`
 - `uniqueItems`
+- `contains` (sub-schema must be compliant to fiboa Schema)
 
 ### Object data type
 

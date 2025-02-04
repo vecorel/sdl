@@ -182,6 +182,9 @@
           "uniqueItems": {
             "type": "boolean",
             "default": false
+          },
+          "contains": {
+            "$ref": "#/$defs/schema"
           }
         }
       }
