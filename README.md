@@ -4,8 +4,8 @@ As fiboa is targeting multiple encodings, there's no single solution for validat
 We must define our own validation vocabulary, based on the fiboa Schema [data types](datatypes.md).
 Nevertheless, fiboa Schema can be translated into JSON Schema.
 
-- Schema identifier: <https://fiboa.github.io/schema/v0.1.0/schema.json>
-- [Metaschema](https://fiboa.github.io/schema/v0.1.0/schema.json) (as JSON Schema)
+- Schema identifier: <https://fiboa.github.io/schema/v0.2.0/schema.json>
+- [Metaschema](https://fiboa.github.io/schema/v0.2.0/schema.json) (as JSON Schema)
 
 ## Vocabulary
 
