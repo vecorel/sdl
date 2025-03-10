@@ -1,0 +1,335 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fiboa.github.io/schema/v0.2.0/schema.json",
+  "type": "object",
+  "required": ["$schema", "properties"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://fiboa.github.io/schema/v0.2.0/schema.json"
+    },
+    "required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "properties": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/schema"
+      }
+    }
+  },
+  "$defs": {
+    "schema": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "boolean",
+            "int8",
+            "uint8",
+            "int16",
+            "uint16",
+            "int32",
+            "uint32",
+            "int64",
+            "uint64",
+            "float",
+            "double",
+            "binary",
+            "string",
+            "array",
+            "object",
+            "date",
+            "date-time",
+            "geometry",
+            "bounding-box"
+          ]
+        },
+        "deprecated": {
+          "type": "boolean",
+          "default": false
+        },
+        "description": {
+          "type": "string"
+        },
+        "default": {}
+      },
+      "allOf": [
+        {
+          "$ref": "#/$defs/string"
+        },
+        {
+          "$ref": "#/$defs/integer"
+        },
+        {
+          "$ref": "#/$defs/floatingpoint"
+        },
+        {
+          "$ref": "#/$defs/array"
+        },
+        {
+          "$ref": "#/$defs/object"
+        },
+        {
+          "$ref": "#/$defs/geometry"
+        }
+      ]
+    },
+    "object": {
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "object"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "anyOf": [
+          {
+            "required": ["properties"]
+          },
+          {
+            "required": ["additionalProperties"]
+          },
+          {
+            "required": ["patternProperties"]
+          }
+        ],
+        "properties": {
+          "required": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/$defs/schema"
+            }
+          },
+          "patternProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/$defs/schema"
+            },
+            "propertyNames": {
+              "type": "string",
+              "format": "regex"
+            },
+            "default": {}
+          },
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "$ref": "#/$defs/schema"
+              }
+            ],
+            "default": false
+          },
+          "maxProperties": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minProperties": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          }
+        }
+      }
+    },
+    "array": {
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "array"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "required": ["items"],
+        "properties": {
+          "items": {
+            "$ref": "#/$defs/schema"
+          },
+          "maxItems": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "uniqueItems": {
+            "type": "boolean",
+            "default": false
+          },
+          "contains": {
+            "$ref": "#/$defs/schema"
+          }
+        }
+      }
+    },
+    "string": {
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "string"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": ["email", "idn-email", "iri", "uri", "uuid"]
+          },
+          "maxLength": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minLength": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "pattern": {
+            "type": "string",
+            "format": "regex"
+          },
+          "enum": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "floatingpoint": {
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["float", "double"]
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/_numerical"
+      }
+    },
+    "integer": {
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "int8",
+              "uint8",
+              "int16",
+              "uint16",
+              "int32",
+              "uint32",
+              "int64",
+              "uint64"
+            ]
+          }
+        }
+      },
+      "then": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/_numerical"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "enum": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "geometry": {
+      "if": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "geometry"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "geometryTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Point",
+                "LineString",
+                "Polygon",
+                "MultiPoint",
+                "MultiLineString",
+                "MultiPolygon"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "_numerical": {
+      "type": "object",
+      "properties": {
+        "maximum": {
+          "type": "number"
+        },
+        "exclusiveMaximum": {
+          "type": "number"
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "exclusiveMinimum": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
