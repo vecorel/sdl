@@ -1,17 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://fiboa.github.io/schema/v0.2.0/schema.json",
+  "$id": "https://vecorel.github.io/sdl/v0.3.0/schema.json",
   "type": "object",
   "required": ["$schema", "properties"],
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://fiboa.github.io/schema/v0.2.0/schema.json"
+      "const": "https://vecorel.github.io/sdl/v0.3.0/schema.json"
     },
     "required": {
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "collection": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
       }
     },
     "properties": {

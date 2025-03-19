@@ -1,8 +1,8 @@
 # Data Types
 
-The following table shows the data types that are used by fiboa Schema.
+The following table shows the data types that are used by Vecorel Schema.
 
-| fiboa data type                                     | Description                                                  |
+| Vecorel data type                                   | Description                                                  |
 | --------------------------------------------------- | ------------------------------------------------------------ |
 | boolean                                             | a value with only two possible states, e.g. true/false, on/off, or yes/no |
 | int8                                                | integer number without decimal places<br />minimum value: -128<br />maximum value: 127 |
