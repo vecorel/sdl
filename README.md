@@ -1,29 +1,32 @@
-# fiboa Schema
+# Vecorel Schema Definition Language (SDL)
 
-As fiboa is targeting multiple encodings, there's no single solution for validation.
-We must define our own validation vocabulary, based on the fiboa Schema [data types](datatypes.md).
-Nevertheless, fiboa Schema can be translated into JSON Schema.
+As Vecorel is targeting multiple encodings, there's no single solution for validation.
+We must define our own validation vocabulary, based on the Vecorel SDL [data types](datatypes.md).
+Nevertheless, Vecorel SDL can be translated into JSON Schema.
 
-- Schema identifier: <https://fiboa.github.io/schema/v0.2.0/schema.json>
-- [Metaschema](https://fiboa.github.io/schema/v0.2.0/schema.json) (as JSON Schema)
+- Schema identifier: <https://vecorel.github.io/sdl/v0.2.0/schema.json>
+- [Metaschema](https://vecorel.github.io/sdl/v0.2.0/schema.json) (as JSON Schema)
 
 ## Vocabulary
 
 The following keywords are generally supported:
 
-- `type`: The [fiboa data types](datatypes.md) as a string, **required**.
+- `type`: The [Vecorel data types](datatypes.md) as a string, **required**.
 - `deprecated`: Indicates whether a schema is deprecated.
 - `default`: Indicates the default value of a schema.
 - `description`: Describes the schema.
 
-At the top-level, you can also indicate the schema language and version:
+At the top-level, you can also indicate the following special properties:
 
 - `$schema`: The schema identifier, see above.
+- `required`: The required properties (see `required` for objects below).
+- `properties`: The schemas for the properties (see `properties` for objects below).
+- `collection`: Specifies whether a property (specified as keys) can be provided only at the collection-level (`true`) or only at the feature-level (`false`). Omit any properties that can be provided at both levels.
 
 Additionally, the following validation vocabulary per data type is defined by JSON Schema.
 
 In principle any keywords available in JSON Schema 2020-12 can be used,
-but it is likely unsupported by the fiboa tooling.
+but it is likely unsupported by the Vecorel tooling.
 
 ### String data type
 
@@ -43,20 +46,21 @@ but it is likely unsupported by the fiboa tooling.
 
 ### Array data type
 
-- `items` (required, object only, sub-schema must be compliant to fiboa Schema)
+- `items` (required, object only, sub-schema must be compliant to Vecorel SDL)
 - `minItems`
 - `maxItems`
 - `uniqueItems`
-- `contains` (sub-schema must be compliant to fiboa Schema)
+- `contains` (sub-schema must be compliant to Vecorel SDL)
 
 ### Object data type
 
 - `required`
-- `properties` (sub-schemas must be compliant to fiboa Schema)
+- `properties` (sub-schemas must be compliant to Vecorel SDL)
 - `additionalProperties`
   (Note: In objects additional properties are disallowed by default, i.e. the default value is `false`.
-  In JSON Schema the default value is `true`.)
-- `patternProperties`
+  In JSON Schema the default value is `true`.
+  Sub-schemas must be compliant to Vecorel SDL)
+- `patternProperties` (sub-schemas must be compliant to Vecorel SDL)
 - `minProperties`
 - `maxProperties` (>= 1)
 
