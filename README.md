@@ -21,7 +21,7 @@ At the top-level, you can also indicate the following special properties:
 - `$schema`: The schema identifier, see above.
 - `required`: The required properties (see `required` for objects below).
 - `properties`: The schemas for the properties (see `properties` for objects below).
-- `collection`: Specifies whether a property (specified as keys) can be provided only at the collection-level (`true`) or only at the feature-level (`false`). Omit any properties that can be provided at both levels.
+- `collection`: Specifies whether a property (specified as keys) must be provided only at the collection-level (`true`) or only at the feature-level (`false`). Omit any properties that can be provided at both levels.
 
 Additionally, the following validation vocabulary per data type is defined by JSON Schema.
 
