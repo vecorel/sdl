@@ -4,8 +4,8 @@ As Vecorel is targeting multiple encodings, there's no single solution for valid
 We must define our own validation vocabulary, based on the Vecorel SDL [data types](datatypes.md).
 Nevertheless, Vecorel SDL can be translated into JSON Schema.
 
-- Schema identifier: <https://vecorel.github.io/sdl/v0.2.0/schema.json>
-- [Metaschema](https://vecorel.github.io/sdl/v0.2.0/schema.json) (as JSON Schema)
+- Schema identifier: <https://vecorel.org/sdl/v0.2.0/schema.json>
+- [Metaschema](https://vecorel.org/sdl/v0.2.0/schema.json) (as JSON Schema)
 
 ## Vocabulary
 
