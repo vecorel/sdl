@@ -28,6 +28,12 @@
       }
     }
   },
+  "patternProperties": {
+    "^$": {
+      "description": "Allow $id, $comments and similar meta properties."
+    }
+  },
+  "additionalProperties": false,
   "$defs": {
     "schema": {
       "type": "object",
