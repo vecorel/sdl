@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://vecorel.github.io/sdl/v0.2.0/schema.json",
+  "$id": "https://vecorel.org/sdl/v0.2.0/schema.json",
   "type": "object",
   "required": ["$schema", "properties"],
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://vecorel.github.io/sdl/v0.2.0/schema.json"
+      "const": "https://vecorel.org/sdl/v0.2.0/schema.json"
     },
     "required": {
       "type": "array",
