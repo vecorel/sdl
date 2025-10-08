@@ -27,6 +27,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - ...
 
+## [v0.2.1] - 2025-10-09
+
+### Added
+
+- Added `requiredSchemas`
+
 ## [v0.2.0] - 2025-08-15
 
 ### Added

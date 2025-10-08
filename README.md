@@ -19,6 +19,7 @@ The following keywords are generally supported:
 At the top-level, you can also indicate the following special properties:
 
 - `$schema`: The schema identifier, see above.
+- `requiredSchemas`: Any other schema URLs that are required / inherited from.
 - `required`: The required properties (see `required` for objects below).
 - `properties`: The schemas for the properties (see `properties` for objects below).
 - `collection`: Specifies whether a property (specified as keys) must be provided only at the collection-level (`true`) or only at the feature-level (`false`). Omit any properties that can be provided at both levels.
