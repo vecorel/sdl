@@ -8,6 +8,13 @@
       "type": "string",
       "const": "https://vecorel.org/sdl/v0.2.0/schema.json"
     },
+    "requiredSchemas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
     "required": {
       "type": "array",
       "items": {
